@@ -7,11 +7,12 @@
   * [x] Open todos.data file for reading
   * [x] put all items into a vector
   * [x] print the items to the screen
-* [ ] As a doer, I want to be able to add an todo item
+* [x] As a doer, I want to be able to add an todo item
+  * [x] Figure out what the command is
+  * [x] Open file for writing
+  * [x] Append todo item to file
 * [ ] As a doer, I want to be mark a todo item as completed
 * [ ] As a doer, I want to delete a todo item
-
-
 
 ## How to use
 
