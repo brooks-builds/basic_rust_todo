@@ -15,9 +15,15 @@
 - [x] As a doer, I want to mark a todo item as completed
 - [x] As a doer, I want to mark a completed todo item as not completed
 - [x] As a doer, I want to delete a todo item
-- [ ] Refactor
-  - [ ] DRY up command
-  - [ ] Change done to be a toggle
+- [x] Refactor
+  - [x] DRY up command
+  - [x] DRY up library for writing to file
+  - [x] Change done to be a toggle
+- [ ] QA
+  - [ ] test for not providing number as an id
+  - [ ] test for not providing anything after delete
+  - [ ] test for providing to high of an id
+  - [ ] test for providing a negative id
 
 ## How to use
 

@@ -32,4 +32,8 @@ impl Todo {
     pub fn print_for_file(&self) -> String {
         format!("{}|{}", self.item, self.completed)
     }
+
+    pub fn toggle_completion(&mut self) {
+        self.completed = !self.completed;
+    }
 }

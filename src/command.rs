@@ -1,9 +1,8 @@
 pub enum Command {
     ListAll,
     Add(String),
-    Done(usize),
+    Toggle(usize),
     Remove(usize),
-    Uncheck(usize),
 }
 
 impl Command {
@@ -18,34 +17,16 @@ impl Command {
 
         match arguments[0].to_lowercase().as_ref() {
             "add" => Ok(Command::Add(arguments[1].clone())),
-            "done" => {
-                let id = match arguments[1].parse::<usize>() {
-                    Ok(id) => id,
-                    Err(error) => {
-                        return Err(format!("Error parsing id out of the command: {}", error))
-                    }
-                };
-                Ok(Command::Done(id))
-            }
-            "delete" => {
-                let id = match arguments[1].parse() {
-                    Ok(id) => id,
-                    Err(error) => {
-                        return Err(format!("error parsing id out of the command: {}", error))
-                    }
-                };
-                Ok(Command::Remove(id))
-            }
-            "uncheck" => {
-                let id = match arguments[1].parse::<usize>() {
-                    Ok(id) => id,
-                    Err(error) => {
-                        return Err(format!("Error parsing id out of the command: {}", error))
-                    }
-                };
-                Ok(Command::Uncheck(id))
-            }
+            "toggle" => Ok(Command::Toggle(Self::get_id_from_arguments(arguments)?)),
+            "delete" => Ok(Command::Remove(Self::get_id_from_arguments(arguments)?)),
             _ => Ok(Command::ListAll),
+        }
+    }
+
+    fn get_id_from_arguments(arguments: Vec<String>) -> Result<usize, String> {
+        match arguments[1].parse::<usize>() {
+            Ok(id) => Ok(id),
+            Err(error) => Err(format!("Error parsing id out of the command: {}", error)),
         }
     }
 }
