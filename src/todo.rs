@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct Todo {
     item: String,
     id: u32,
