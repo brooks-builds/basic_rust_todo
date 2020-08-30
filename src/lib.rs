@@ -18,6 +18,9 @@ pub fn run(file_name: &'static str, arguments: Vec<String>) -> Result<Vec<Todo>,
         }
         Command::Toggle(id) => {
             let mut todos = list_all(file_name)?;
+            if todos.len() <= id {
+                return Err("Error, provided id not associated with a todo item".to_owned());
+            }
             todos[id].toggle_completion();
             write_all_to_file(file_name, todos, false)?;
 
@@ -25,6 +28,9 @@ pub fn run(file_name: &'static str, arguments: Vec<String>) -> Result<Vec<Todo>,
         }
         Command::Remove(id) => {
             let mut todos = list_all(file_name)?;
+            if todos.len() <= id {
+                return Err("Error, provided id not associated with a todo item".to_owned());
+            }
             todos.remove(id);
             write_all_to_file(file_name, todos, false)?;
             list_all(file_name)
@@ -156,5 +162,47 @@ mod tests {
             }
             Err(error) => eprintln!("error testing deleting items: {}", error),
         }
+    }
+
+    #[test]
+    fn test_not_providing_id() {
+        reset_todos_data();
+        let arguments = vec!["toggle".to_owned()];
+        let file_name = "todos.data";
+        assert_eq!("error, missing id", run(file_name, arguments).unwrap_err());
+    }
+
+    #[test]
+    fn test_not_a_number_as_an_id() {
+        reset_todos_data();
+        let arguments = vec!["toggle".to_owned(), "a".to_owned()];
+        let file_name = "todos.data";
+        assert_eq!(
+            "Error parsing id out of the command: invalid digit found in string",
+            run(file_name, arguments).unwrap_err()
+        );
+    }
+
+    #[test]
+    fn test_id_too_high_for_toggle() {
+        reset_todos_data();
+        let arguments = vec!["toggle".to_owned(), "5".to_owned()];
+        let file_name = "todos.data";
+        assert_eq!(
+            "Error, provided id not associated with a todo item",
+            run(file_name, arguments).unwrap_err()
+        );
+    }
+
+    #[test]
+    fn test_handling_lack_of_add_command() {
+        reset_todos_data();
+        let arguments = vec!["add".to_owned()];
+        let file_name = "todos.data";
+
+        assert_eq!(
+            "error, missing new todo item",
+            run(file_name, arguments).unwrap_err()
+        );
     }
 }

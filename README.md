@@ -19,11 +19,13 @@
   - [x] DRY up command
   - [x] DRY up library for writing to file
   - [x] Change done to be a toggle
-- [ ] QA
-  - [ ] test for not providing number as an id
-  - [ ] test for not providing anything after delete
-  - [ ] test for providing to high of an id
-  - [ ] test for providing a negative id
+  - [x] qa tests use unwrap_err
+- [x] QA
+  - [x] test for not providing anything after a command that requires an id
+  - [x] test for not providing number as an id
+  - [x] test for providing to high of an id
+  - [x] test for providing a negative id
+  - [x] test for not providing a todo after command add
 
 ## How to use
 
