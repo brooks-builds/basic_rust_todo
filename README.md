@@ -11,10 +11,13 @@
   - [x] Figure out what the command is
   - [x] Open file for writing
   - [x] Append todo item to file
-  - [ ] new todo has correct format in file
+  - [x] new todo has correct format in file
 - [x] As a doer, I want to mark a todo item as completed
-- [ ] As a doer, I want to mark a completed todo item as not completed
+- [x] As a doer, I want to mark a completed todo item as not completed
 - [x] As a doer, I want to delete a todo item
+- [ ] Refactor
+  - [ ] DRY up command
+  - [ ] Change done to be a toggle
 
 ## How to use
 

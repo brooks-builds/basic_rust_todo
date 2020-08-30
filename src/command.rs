@@ -3,6 +3,7 @@ pub enum Command {
     Add(String),
     Done(usize),
     Remove(usize),
+    Uncheck(usize),
 }
 
 impl Command {
@@ -34,6 +35,15 @@ impl Command {
                     }
                 };
                 Ok(Command::Remove(id))
+            }
+            "uncheck" => {
+                let id = match arguments[1].parse::<usize>() {
+                    Ok(id) => id,
+                    Err(error) => {
+                        return Err(format!("Error parsing id out of the command: {}", error))
+                    }
+                };
+                Ok(Command::Uncheck(id))
             }
             _ => Ok(Command::ListAll),
         }

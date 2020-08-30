@@ -67,6 +67,31 @@ pub fn run(file_name: &'static str, arguments: Vec<String>) -> Result<Vec<Todo>,
             }
             list_all(file_name)
         }
+        Command::Uncheck(id) => {
+            let mut todos = list_all(file_name)?;
+            todos[id].completed = false;
+            let mut todo_file = match OpenOptions::new()
+                .write(true)
+                .truncate(true)
+                .open(file_name)
+            {
+                Ok(file) => file,
+                Err(error) => {
+                    return Err(format!(
+                        "error opening file for writing a completed todo: {}",
+                        error
+                    ))
+                }
+            };
+            if let Err(error) = todos
+                .iter()
+                .try_for_each(|todo| write!(todo_file, "{}\r\n", todo.print_for_file()))
+            {
+                return Err(format!("error writing completed todo to disk: {}", error));
+            }
+
+            list_all(file_name)
+        }
     }
 }
 
@@ -142,6 +167,20 @@ mod tests {
                 "0 [x] - make a todo list application",
                 todo_items[0].print()
             ),
+            Err(error) => eprintln!(
+                "error testing if we can mark todo items as completed: {}",
+                error
+            ),
+        }
+    }
+
+    #[test]
+    fn can_mark_todo_item_as_not_completed() {
+        reset_todos_data();
+        let arguments = vec!["uncheck".to_owned(), "1".to_owned()];
+        let file_name = "todos.data";
+        match run(file_name, arguments) {
+            Ok(todo_items) => assert_eq!("1 [ ] - play the drop game", todo_items[1].print()),
             Err(error) => eprintln!(
                 "error testing if we can mark todo items as completed: {}",
                 error
