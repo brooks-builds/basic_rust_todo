@@ -34,3 +34,118 @@ List all todo items
 ```
 basic_rust_todo
 ```
+
+## Topics
+
+<!-- - x Introduction to the course
+- x Why Learn Rust -->
+<!-- - First steps -->
+  <!-- -x Installing Rust
+    -x Windows
+    -x Mac
+    -x Linux -->
+  <!-- -x  Hello World
+  - Setting up VS Code
+    - RLS
+    - Rust Analyzer
+    - Clippy
+    - Rust FMT -->
+
+- Code Basics
+  - Comments (https://doc.rust-lang.org/reference/comments.html?)
+    - // normal comments
+    - /// doc comments
+    - //! inner line doc comment (top of the file)
+  - Printing to the screen
+    - println!
+    - dbg!
+  - when to use semi-colons
+    - implicit return
+  - Variables
+    - immutable vs mutable
+    - reference
+  - functions
+    - ownership
+    - borrowing
+  - Data structures
+    - Vectors
+    - Arrays
+    - String
+      - Heap
+  - Iteration
+    - for loop
+    - while loop
+    - infinite loop
+    - iterators
+      - skip?
+      - collect
+  - flow control
+    - if / else
+    - if let
+    - match
+    - \_ as a catchall
+  - Using the documentation
+  - Type system
+    - Primitives
+      - str
+        - stack
+        - `&str`
+        - `$'static str`
+      - usize
+    - Compound Types
+      - What is a compound type (consists of multiple other types)
+      - enums (with variants)
+      - struct
+        - methods
+    - Creating Custom types
+  - module system
+    - running functions in another file
+      - mod statement
+      - `mod command;` (command being command.rs in same file)
+      - `mod todo;` (todo being a folder that has a mod.rs in that folder)
+    - use statement
+      - `use std::fs::{File, OpenOptions};`
+      - `use std::io::prelude::*;`
+      - `use std::io::BufReader;`
+    - re-publishing modules to other files
+    - super
+  - error handling
+    - result
+    - unwrapping
+    - ? operator (https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html)
+  - what about null
+    - None, Some
+  - what are macros
+  - symbols
+    - :: (symbol resolution operator)
+  - testing
+    - tests in the same file
+    - tests in doc comments
+    - assert
+    - assert_eq
+  - impl blocks
+    - inherit
+    - trait
+- std library
+  - arguments from the command line
+  - files
+    - writing to files
+      - truncate
+      - append
+    - reading from files
+  - useful macros
+    - format!
+- Cargo
+  - compiling
+      <!-- - Run -->
+    - build
+    - configuration - debug - release
+    <!-- - new -->
+  - test
+  - clean
+  - docs
+  - cargo vs rustc
+  - help
+  - installing packages
+    - ripgrep
+  - check
